@@ -14,16 +14,17 @@ const {getusers,
         updateuser,
         deleteuser,
         changeuserpassword,
-        passwordrecovery,getEtudiant
+        passwordrecovery,
+        resizeImage,
+        uploadUserImage
     }=require('../services/userService');
 
 
 const router=express.Router();
 
 router.put('/changepassword/:id',changeuserpasswordvalidate,changeuserpassword);
-router.route('/getetudiant').get(getEtudiant)
 router.route('/').get(getusers)
-                 .post(createuserValidator,createuser)
+                 .post(uploadUserImage,resizeImage,createuserValidator,createuser)
                  .put(forgetuserpasswordvalidate,passwordrecovery);
 
 router.route('/:id').get(getuserValidator,getuser)

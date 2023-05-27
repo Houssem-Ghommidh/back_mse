@@ -21,7 +21,7 @@ exports.createproduitValidator=[
                 );
               }
             })
-          ),,
+          ),
 
       
     validatorMiddleware,

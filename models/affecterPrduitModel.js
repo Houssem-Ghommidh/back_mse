@@ -2,14 +2,21 @@ const  mongoose=require('mongoose');
 
 const affecterProuitShema=new mongoose.Schema(
     {
-        id_user:{
+        id_technicien:{
             type:mongoose.Schema.ObjectId,
             ref:'user',
-            require:[true,'id_user require']
+            require:false,
+            default:null
+        },
+        id_superviseur:{
+            type:mongoose.Schema.ObjectId,
+            ref:'user',
+            require:false,
+            default:null
         },
         quantite:{
             type:Number,
-            require:[true,'description require']
+            require:[true,'quantite require']
         },
         id_produit:{
             type:mongoose.Schema.ObjectId,

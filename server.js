@@ -8,6 +8,13 @@ const ApiError=require('./utils/apiError')
 const userRoutes=require('./routes/userRoutes')
 const authRoutes=require('./routes/authRoues')
 const fournisseurRoutes=require('./routes/fournisseurRoutes')
+const produitRoutes=require('./routes/produitRoutes')
+const projetRoutes=require('./routes/projetRoutes')
+const tacheRoutes=require('./routes/tacheRoutes')
+const rapportRoutes=require('./routes/rapportRoutes')
+const demandedachatRoutes=require('./routes/demandedachat')
+const affecterProduitRoutes=require('./routes/affecterProduitRoutes')
+
 
 
 const app=express()
@@ -34,11 +41,20 @@ if(process.env.NODE_ENV === 'dev')
 app.use('/api/users',userRoutes);
 app.use('/api/auth',authRoutes);
 app.use('/api/fournisseur',fournisseurRoutes);
+app.use('/api/produit',produitRoutes);
+app.use('/api/projet',projetRoutes);
+app.use('/api/tache',tacheRoutes);
+app.use('/api/rapport',rapportRoutes);
+app.use('/api/demandedachat',demandedachatRoutes);
 
+app.use('/api/affecterproduit',affecterProduitRoutes);
+
+app.use('/api/produitsImages', express.static('./uploads/produit'))
+app.use('/api/userImages', express.static('./uploads/users'))
+app.use('/api/tacheImages', express.static('./uploads/taches'))
 app.get('/',(req,res) => {res.send('route API')});
 //static Images Folder
 
-app.use('/image', express.static('./image'))
 //static Images Folder
 
 
@@ -55,14 +71,14 @@ app.all("*",(req,res,next)=>{
 // Global error handling middleware for express
 app.use(globalError);
 const PORT=process.env.PORT || 8000;
-app.listen(PORT, "0.0.0.0", () => {
-    console.log("server started");
+app.listen(PORT,"0.0.0.0", () => {
+    console.log("server started on port : " +PORT);
   });
 
 // error handling Rejection outside express
 process.on("unhandledRejection",(err=>{
     console.error(`UnhandledRejection Errors: ${err.name} | ${err.message}`);
-    server.close(()=>{
+    app.close(()=>{
        console.log('shutting down....')
        process.exit(1);})
   

@@ -38,7 +38,7 @@ const setImageURL = (doc) => {
   if (doc.images) {
     const imagesList = [];
     doc.images.forEach((image) => {
-      const imageUrl = `${process.env.BASE_URL}/products/${image}`;
+      const imageUrl = `${process.env.BASE_URL}/api/tacheImages/${image}`;
       imagesList.push(imageUrl);
     });
     doc.images = imagesList;

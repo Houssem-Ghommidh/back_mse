@@ -3,7 +3,23 @@ const asyncHandler = require('express-async-handler')
 const ApiError=require('../utils/apiError')
 const bcrypt=require('bcryptjs');
 
-
+const {uploadSingleImage}= require('../middlewares/uploadImageMiddleware')
+const { v4: uuidv4 } = require('uuid');
+const sharp = require('sharp');
+exports.uploadUserImage = uploadSingleImage('image')
+// Image processing
+exports.resizeImage = asyncHandler(async (req, res, next) => {
+    const filename= `user-${uuidv4()}-${Date.now()}.jpeg`;
+    if(req.file){
+    await sharp(req.file.buffer)
+    .resize(600, 600)
+    .toFormat('jpeg')
+    .jpeg({ quality: 95 })
+    .toFile(`uploads/users/${filename}`);
+    // Save image into our db
+    req.body.image = filename;}
+    next();
+    });
 // @desc    Get all user
 // @route   GET api/users/
 // @access  Private
@@ -27,12 +43,6 @@ exports.getuser = asyncHandler(async(req,res,next)=>{
 }
   res.status(200).json({data: users});
 })
-exports.getEtudiant = asyncHandler(async(req,res,next)=>{
-  const users = await usermodel.find({role:"eleve"});
-  res.status(200).json({results:users.length,data:users})
-
-})
-
 
 // @desc    Create a new user
 // @route   POST api/users/

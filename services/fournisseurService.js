@@ -8,7 +8,6 @@ const ApiError=require('../utils/apiError')
 // @access  Private
 exports.getfournisseurs=asyncHandler(async(req,res) => {
     const fournisseur = await Fournisseurmodel.find({}) ;
-    console.log(fournisseur) 
 
     res.status(200).json({results:fournisseur.length,data:fournisseur})
   });

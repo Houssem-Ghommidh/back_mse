@@ -29,7 +29,7 @@ exports.createuserValidator=[
                         return true;
                      }),
     check('passwordconfirm').notEmpty().withMessage('passwordconfirm required'),
-    check('role').isIn(['eleve','admin','enseigne']).withMessage('role must be eleve | admin | enseigne'),                 
+    check('role').isIn(['superviseur','admin','technicien',"client"]).withMessage('role must be superviseur | admin | technicien [ client'),                 
 
     validatorMiddleware,
 ];
@@ -47,7 +47,7 @@ exports.updateuserValidator=[
                                     }
                                 })),
     check('passwordconfirm').optional().notEmpty().withMessage('passwordconfirm required'),
-    check('role').optional().isIn(['eleve','admin','enseigne']).withMessage('role must be eleve | admin | enseigne'),  
+    check('role').optional().isIn(['superviseur','admin','technicien',"client"]).withMessage('role must be superviseur | admin | technicien [ client'),  
     validatorMiddleware,
 ];
 

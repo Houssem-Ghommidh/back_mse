@@ -22,6 +22,10 @@ const userShema=new mongoose.Schema(
              require:[true,'email require'],
              unique:true,
         },
+        image:{
+            type:String,
+            trim:true,
+        },
         password:
         {
             type:String,

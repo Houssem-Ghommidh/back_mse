@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const raportSchema = new mongoose.Schema(
+const rapportSchema = new mongoose.Schema(
   {
    
               
@@ -56,5 +56,5 @@ const raportSchema = new mongoose.Schema(
 );
 
 
-const Raport=mongoose.model('raport',raportSchema);
+const Raport=mongoose.model('rapport',rapportSchema);
 module.exports=Raport;

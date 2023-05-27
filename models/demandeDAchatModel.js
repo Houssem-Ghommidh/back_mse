@@ -21,7 +21,7 @@ const demandedachatShema=new mongoose.Schema(
         id_produit:{
             type:mongoose.Schema.ObjectId,
             ref:'produit',
-            require:[true,'id_produit require']
+            require:[false,'id_produit require']
         }
     },{timestamps:true}
 );
